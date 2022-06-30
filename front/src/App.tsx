@@ -12,6 +12,12 @@ function App() {
   const [tables, setTables] = useState<string[]>([]);
   const [attributes, setAttributes] = useState<string[]>([]);
 
+  const [fileReady, setFileReady] = useState(false);
+  const [fileReadyQuery, setFileReadyQuery] = useState<IQuery>({
+    table: '',
+    attributes: [],
+    time: { start: '', end: '' },
+  });
 
   useEffect(() => {
     // Get tables from server
@@ -39,6 +45,9 @@ function App() {
           ''
         )}
 
+        <div>
+          {attributes.includes('date_time') ? <ChooseTime /> : ''}
+      </div>
     </QueryProvider>
   );
 }
