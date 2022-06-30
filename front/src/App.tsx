@@ -47,6 +47,12 @@ function App() {
 
         <div>
           {attributes.includes('date_time') ? <ChooseTime /> : ''}
+          <ConvertSection
+            tableAttributes={attributes}
+            setFileReady={setFileReady}
+            setFileReadyQuery={setFileReadyQuery}
+          />
+        </div>
       </div>
     </QueryProvider>
   );
