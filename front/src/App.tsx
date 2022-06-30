@@ -53,6 +53,10 @@ function App() {
             setFileReadyQuery={setFileReadyQuery}
           />
         </div>
+        <DownloadSection
+          fileReady={fileReady}
+          fileReadyQuery={fileReadyQuery}
+        />
       </div>
     </QueryProvider>
   );
