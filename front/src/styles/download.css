@@ -1,0 +1,51 @@
+.download {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  width: fit-content;
+  /* min-width: 5em;
+  max-width: 9em; */
+  /* height: min-content; */
+  padding: 0.4em;
+  border: 4px solid #395b64;
+  border-radius: 0.4em;
+  color: #f5f2e7;
+  margin: 0 1em;
+  justify-content: space-between;
+}
+
+.download-description {
+  text-align: left;
+  margin: 0;
+}
+.download-description > span {
+  color: rgb(214, 156, 41);
+}
+.date_time-description {
+  text-align: left;
+  margin: 0 0 1.3em 0;
+}
+.date_time-description > span {
+  color: rgb(214, 156, 41);
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin: 0.2em;
+  padding: 0.5em;
+  background-color: green;
+  border-radius: 0.3em;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  height: 2em;
+  width: 5em;
+  height: 1.5em;
+  color: #f5f2e7;
+  text-decoration: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-shadow: 1px 1px 4px 1px black;
+}
