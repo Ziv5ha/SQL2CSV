@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const converterRouter = require('./routers/converterRouter');
 const tableRouter = require('./routers/tableRouter');
+const homePageRouter = require('./routers/homePage');
+const testRouter = require('./routers/testRouter');
 const { connectToDB } = require('./utils/db');
 
 const app = express();
@@ -10,6 +12,8 @@ app.use(cors());
 
 app.use('/converter', converterRouter);
 app.use('/get', tableRouter);
+app.use('/test', testRouter);
+app.get('/', homePageRouter);
 
 const start = async () => {
   await connectToDB();
