@@ -5,8 +5,14 @@ export interface IQuery {
     start: string;
     end: string;
   };
+  reactors: string[];
 }
-export type QueryPart = 'table' | 'attributes' | 'timeStart' | 'timeEnd';
+export type QueryPart =
+  | 'table'
+  | 'attributes'
+  | 'reactors'
+  | 'timeStart'
+  | 'timeEnd';
 
 export interface IQueryContext {
   query: IQuery;

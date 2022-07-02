@@ -15,11 +15,15 @@ export default function ConvertSection({
   setFileReadyQuery: React.Dispatch<React.SetStateAction<IQuery>>;
 }) {
   const { query } = useContext(QueryContext) as IQueryContext;
-  const { table, attributes } = query;
+  const { table, attributes, reactors } = query;
 
-  const convertFunc = async () => {
+  const convertFunc = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/converter/convert', {
+      // await axios.post('http://localhost:8080/converter/convert', {
+      await axios.post('./converter/convert', {
         query: createQuery(query, tableAttributes),
       });
       setFileReadyQuery(query);
@@ -28,10 +32,12 @@ export default function ConvertSection({
       console.log(error);
     }
   };
-  const isDisabled = table === '' || attributes.length === 0;
+  const isDisabled =
+    table === '' || attributes.length === 0 || reactors.length === 0;
   return (
     <div className='convert'>
       <button
+        type='button'
         className='convert-btn'
         onClick={convertFunc}
         disabled={isDisabled}

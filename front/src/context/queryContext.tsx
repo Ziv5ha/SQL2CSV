@@ -8,6 +8,7 @@ const QueryProvider = ({ children }: { children: React.ReactNode }) => {
     attributes: [],
     table: '',
     time: { start: '', end: '' },
+    reactors: ['test'],
   });
 
   const updateQuery = (queryPart: QueryPart, str: string) => {
@@ -17,35 +18,57 @@ const QueryProvider = ({ children }: { children: React.ReactNode }) => {
           table: str,
           attributes: [],
           time: { start: '', end: '' },
+          reactors: [],
         });
         break;
       case 'timeStart':
-        setQuery(({ table, attributes, time: { end } }) => ({
+        setQuery(({ table, attributes, time: { end }, reactors }) => ({
           table,
           attributes,
           time: { start: str, end },
+          reactors,
         }));
         break;
       case 'timeEnd':
-        setQuery(({ table, attributes, time: { start } }) => ({
+        setQuery(({ table, attributes, time: { start }, reactors }) => ({
           table,
           attributes,
           time: { start, end: str },
+          reactors,
         }));
 
         break;
-      default:
+      case 'attributes':
         if (query.attributes.includes(str)) {
-          setQuery(({ table, attributes, time }) => ({
+          setQuery(({ table, attributes, time, reactors }) => ({
             table,
             attributes: attributes.filter((attr) => attr !== str),
             time,
+            reactors,
           }));
         } else {
-          setQuery(({ table, attributes, time }) => ({
+          setQuery(({ table, attributes, time, reactors }) => ({
             table,
             attributes: [...attributes, str],
             time,
+            reactors,
+          }));
+        }
+        break;
+      case 'reactors':
+        if (query.reactors.includes(str)) {
+          setQuery(({ table, attributes, time, reactors }) => ({
+            table,
+            attributes,
+            time,
+            reactors: reactors.filter((attr) => attr !== str),
+          }));
+        } else {
+          setQuery(({ table, attributes, time, reactors }) => ({
+            table,
+            attributes,
+            time,
+            reactors: [...reactors, str],
           }));
         }
         break;

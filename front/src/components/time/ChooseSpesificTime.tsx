@@ -27,6 +27,7 @@ export default function ChooseSpesificTime() {
           ref={startTimeRef}
           className='custom-picker'
         />
+        <span>{getMoment(startTimeRef.current?.value)}</span>
       </div>
       <div className='time-input'>
         until:
@@ -36,6 +37,7 @@ export default function ChooseSpesificTime() {
           ref={endTimeRef}
           className='custom-picker'
         />
+        <span>{getMoment(endTimeRef.current?.value)}</span>
       </div>
     </form>
   );

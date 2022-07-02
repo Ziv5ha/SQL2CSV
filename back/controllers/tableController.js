@@ -27,4 +27,21 @@ const getAttributes = async (req, res, next) => {
   }
 };
 
-module.exports = { getMachines, getAttributes };
+const getReactors = async (req, res, next) => {
+  try {
+    const { machine } = req.params;
+    if (containsDrop(machine)) {
+      console.log(machine);
+      res.send("don't DROP tables from here");
+      return;
+    }
+    const result = await client.query(
+      `SELECT DISTINCT reactor_id.reactor_name FROM ${machine} INNER JOIN reactor_id ON measurements.reactor_id = reactor_id.reactor_id`
+    );
+    res.send(result.rows.map((reactor) => reactor.reactor_name));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getMachines, getAttributes, getReactors };

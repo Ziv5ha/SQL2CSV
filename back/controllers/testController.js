@@ -8,7 +8,7 @@ const {
 
 const getTest = async (req, res, next) => {
   const result = await client.query(
-    "SELECT * FROM measurements where date_time BETWEEN '2022-04-14 11:36:40' AND '2022-04-15 11:36:40'"
+    "SELECT reactor_id.reactor_name AS Reactor_Name, measurements.controller_id AS controller_id, measurements.temperature AS temperature FROM measurements INNER JOIN reactor_id ON measurements.reactor_id = reactor_id.reactor_id WHERE reactor_id.reactor_name IN ('scrumpe2b', 'ejohnstone5', 'kmoroney2m')"
   );
   res.send(result.rows);
 };

@@ -3,7 +3,6 @@ const {
   downloadCSV,
   createCSV,
 } = require('../controllers/converterController');
-const { preventDrop } = require('../middlewares/preventDropTable');
 const router = Router();
 
 // router.get('/download', )
