@@ -18,7 +18,6 @@ const getAttributes = async (req, res, next) => {
   try {
     const { machine } = req.params;
     if (containsDrop(machine)) {
-      console.log(machine);
       res.send("don't DROP tables from here");
       return;
     }

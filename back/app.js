@@ -7,6 +7,7 @@ const homePageRouter = require('./routers/homePage');
 const testRouter = require('./routers/testRouter');
 const { errorHandler } = require('./error/errorHandler');
 const { connectToDB } = require('./utils/db');
+const { log } = require('./utils/log');
 
 const app = express();
 app.use(express.json());
@@ -23,7 +24,7 @@ app.use(errorHandler);
 const start = async () => {
   await connectToDB();
   app.listen(8080, () => {
-    console.log('\x1b[43mrunning on port 8080\x1b[0m');
+    log('\x1b[32mrunning on port 8080\x1b[0m');
   });
   open('http://localhost:8080');
 };

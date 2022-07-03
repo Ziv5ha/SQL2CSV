@@ -1,5 +1,6 @@
 const { json2csv } = require('json-2-csv');
 const fs = require('fs');
+const { log } = require('../utils/log');
 
 /**
  * Creates a csv file from data inputed in JSON form.
@@ -17,7 +18,7 @@ const jsonToCsv = (data, res) => {
       fs.writeFile('./temp/data.csv', csv, (err) => {
         if (err) console.log(err);
         else {
-          console.log('File written successfully');
+          log('File written successfully');
           res.send(true);
         }
       });

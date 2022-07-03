@@ -1,6 +1,7 @@
 const { HOST, PORT, USER, PASSWORD } = require('./config');
 
 const { Client } = require('pg');
+const { log } = require('./log');
 
 let client = new Client({
   host: HOST,
@@ -11,7 +12,7 @@ let client = new Client({
 const connectToDB = async () => {
   try {
     await client.connect();
-    console.log('\x1b[33mconnected to:\x1b[0m');
+    log('\x1b[33mconnected to:\x1b[0m');
     console.log({
       host: HOST,
       port: PORT,
@@ -19,7 +20,7 @@ const connectToDB = async () => {
       password: PASSWORD,
     });
   } catch (error) {
-    console.error('\x1b[41mfailed connecting to:\x1b[0m');
+    log('\x1b[41mfailed connecting to:\x1b[0m');
     console.log({
       host: HOST,
       port: PORT,

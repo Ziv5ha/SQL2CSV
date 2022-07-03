@@ -1,4 +1,5 @@
 const { client } = require('../utils/db');
+const { log } = require('../utils/log');
 const {
   createMeasurementsTableTest,
   populateMeasurementsTableTest,
@@ -20,7 +21,7 @@ const testFunc = async (req, res, next) => {
   await client.query(createReactorIDTableTest);
   await client.query(populateMeasurementsTableTest);
   await client.query(populateReactorIDTableTest);
-  console.log('test table restarted');
+  log('test table restarted');
   res.send('test table restarted');
 };
 
