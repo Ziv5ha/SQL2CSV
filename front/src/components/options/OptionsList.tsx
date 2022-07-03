@@ -8,11 +8,9 @@ export default function OptionsList({
   queryPart,
   setAttributes,
   setReactors,
-  setErrorMsg,
 }: {
   options: string[];
   queryPart: 'table' | 'attributes' | 'reactors';
-  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setAttributes?: React.Dispatch<React.SetStateAction<string[]>>;
   setReactors?: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
@@ -23,7 +21,6 @@ export default function OptionsList({
         key={option}
         option={option}
         queryPart={queryPart}
-        setErrorMsg={setErrorMsg}
         setAttributes={queryPart === 'table' ? setAttributes : undefined}
         setReactors={queryPart === 'table' ? setReactors : undefined}
       />

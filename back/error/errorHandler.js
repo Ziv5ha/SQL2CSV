@@ -6,12 +6,12 @@ const errorHandler = (err, req, res, next) => {
       console.error(error);
       res.send(
         404,
-        'could not get a response from the DB, either a problem with the query or the DB server. chech server logs for details.'
+        'Could not get a response from the DB. Either a problem with the query or the DB server. Chech server logs for details.'
       );
       break;
     case 503:
-      console.log('failed connecting to DB');
-      res.send('failed connecting to DB');
+      console.log('Failed connecting to DB');
+      res.send('Failed connecting to DB');
       break;
 
     default:

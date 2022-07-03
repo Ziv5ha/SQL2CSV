@@ -2,7 +2,7 @@ const { HOST, PORT, USER, PASSWORD } = require('./config');
 
 const { Client } = require('pg');
 
-const client = new Client({
+let client = new Client({
   host: HOST,
   port: PORT,
   user: USER,
@@ -10,13 +10,22 @@ const client = new Client({
 });
 const connectToDB = async () => {
   try {
-    console.log(client);
     await client.connect();
     console.log('connected to DB');
   } catch (error) {
-    console.log('failed connecting to DB');
-    console.error(error);
+    console.error('failed connecting to DB');
+    console.error('Check if the DB is online and restart the server');
   }
 };
 
-module.exports = { connectToDB, client };
+const reconnectToDB = async () => {
+  client = new Client({
+    host: HOST,
+    port: PORT,
+    user: USER,
+    password: PASSWORD,
+  });
+  await connectToDB();
+};
+
+module.exports = { connectToDB, client, reconnectToDB };

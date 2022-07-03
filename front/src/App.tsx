@@ -13,7 +13,6 @@ function App() {
   const [tables, setTables] = useState<string[]>([]);
   const [attributes, setAttributes] = useState<string[]>([]);
   const [reactors, setReactors] = useState<string[]>([]);
-  const [errorMsg, setErrorMsg] = useState('');
 
   const [fileReady, setFileReady] = useState(false);
   const [fileReadyQuery, setFileReadyQuery] = useState<IQuery>({
@@ -30,17 +29,14 @@ function App() {
         // const tables = await axios.get('http://localhost:8080/get/tables');
         const tables = await axios.get('./get/tables');
         setTables(tables.data);
-      } catch (error: any) {
-        if (error) {
-          if (error.message) setErrorMsg(error.message);
-        }
+      } catch (error) {
         console.log(error);
       }
     })();
   }, []);
 
-  if (tables.length < 1) {
-    return <Disconected errorMsg={errorMsg} />;
+  if (tables.length === 0) {
+    return <Disconected />;
   } else {
     return (
       <QueryProvider>
@@ -48,25 +44,16 @@ function App() {
           <OptionsList
             options={tables}
             queryPart='table'
-            setErrorMsg={setErrorMsg}
             setAttributes={setAttributes}
             setReactors={setReactors}
           />
           {attributes.length > 0 ? (
-            <OptionsList
-              options={attributes}
-              queryPart='attributes'
-              setErrorMsg={setErrorMsg}
-            />
+            <OptionsList options={attributes} queryPart='attributes' />
           ) : (
             ''
           )}
           {reactors.length > 0 ? (
-            <OptionsList
-              options={reactors}
-              queryPart='reactors'
-              setErrorMsg={setErrorMsg}
-            />
+            <OptionsList options={reactors} queryPart='reactors' />
           ) : (
             ''
           )}
@@ -77,7 +64,6 @@ function App() {
               tableAttributes={attributes}
               setFileReady={setFileReady}
               setFileReadyQuery={setFileReadyQuery}
-              setErrorMsg={setErrorMsg}
             />
           </div>
           <DownloadSection

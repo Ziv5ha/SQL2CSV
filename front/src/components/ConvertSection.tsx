@@ -7,12 +7,10 @@ import { createQuery } from '../helpers/createQuery';
 
 export default function ConvertSection({
   tableAttributes,
-  setErrorMsg,
   setFileReady,
   setFileReadyQuery,
 }: {
   tableAttributes: string[];
-  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setFileReady: React.Dispatch<React.SetStateAction<boolean>>;
   setFileReadyQuery: React.Dispatch<React.SetStateAction<IQuery>>;
 }) {
@@ -30,11 +28,8 @@ export default function ConvertSection({
       });
       setFileReadyQuery(query);
       setFileReady(true);
-    } catch (error: any) {
+    } catch (error) {
       updateQuery('table', '');
-      if (error) {
-        if (error.message) setErrorMsg(error.message);
-      }
       console.log(error);
     }
   };

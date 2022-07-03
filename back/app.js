@@ -3,7 +3,6 @@ const cors = require('cors');
 const open = require('open');
 const converterRouter = require('./routers/converterRouter');
 const tableRouter = require('./routers/tableRouter');
-const connectRouter = require('./routers/connectRouter');
 const homePageRouter = require('./routers/homePage');
 const testRouter = require('./routers/testRouter');
 const { errorHandler } = require('./error/errorHandler');
@@ -16,7 +15,6 @@ app.use(express.static('public'));
 
 app.use('/converter', converterRouter);
 app.use('/get', tableRouter);
-app.use('/reconnect', connectRouter);
 app.use('/test', testRouter);
 app.get('/', homePageRouter);
 

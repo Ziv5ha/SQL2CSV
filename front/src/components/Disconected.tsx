@@ -1,26 +1,15 @@
-import axios from 'axios';
 import React from 'react';
 import '../styles/disconected.css';
 
-export default function Disconected({ errorMsg }: { errorMsg: string }) {
-  const onSubmitFunc = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('reconnecting...');
-    await axios.post('./reconnect/');
-    window.location.reload();
-  };
+export default function Disconected() {
   return (
     <div className='disconect-msg'>
       <h2>
         Disconected from Database <span className='blink'>🔴</span>
       </h2>
-      {errorMsg}
-      <form onSubmit={onSubmitFunc}>
-        <button type='submit' className='refresh-btn'>
-          Refresh
-        </button>{' '}
-        to try again
-      </form>
+      Check if the database is online and restart the server.
+      <br />
+      If there's still a problem check the server logs for details.
     </div>
   );
 }
