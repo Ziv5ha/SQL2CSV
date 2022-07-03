@@ -7,11 +7,13 @@ import ConvertSection from './components/ConvertSection';
 import ChooseTime from './components/time/ChooseTime';
 import { IQuery } from './types';
 import DownloadSection from './components/download/DSection';
+import Disconected from './components/Disconected';
 
 function App() {
   const [tables, setTables] = useState<string[]>([]);
   const [attributes, setAttributes] = useState<string[]>([]);
   const [reactors, setReactors] = useState<string[]>([]);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const [fileReady, setFileReady] = useState(false);
   const [fileReadyQuery, setFileReadyQuery] = useState<IQuery>({
@@ -28,47 +30,64 @@ function App() {
         // const tables = await axios.get('http://localhost:8080/get/tables');
         const tables = await axios.get('./get/tables');
         setTables(tables.data);
-      } catch (error) {
+      } catch (error: any) {
+        if (error) {
+          if (error.message) setErrorMsg(error.message);
+        }
         console.log(error);
       }
     })();
   }, []);
 
-  return (
-    <QueryProvider>
-      <div className='app'>
-        <OptionsList
-          options={tables}
-          queryPart='table'
-          setAttributes={setAttributes}
-          setReactors={setReactors}
-        />
-        {attributes.length > 0 ? (
-          <OptionsList options={attributes} queryPart='attributes' />
-        ) : (
-          ''
-        )}
-        {reactors.length > 0 ? (
-          <OptionsList options={reactors} queryPart='reactors' />
-        ) : (
-          ''
-        )}
+  if (tables.length < 1) {
+    return <Disconected errorMsg={errorMsg} />;
+  } else {
+    return (
+      <QueryProvider>
+        <div className='app'>
+          <OptionsList
+            options={tables}
+            queryPart='table'
+            setErrorMsg={setErrorMsg}
+            setAttributes={setAttributes}
+            setReactors={setReactors}
+          />
+          {attributes.length > 0 ? (
+            <OptionsList
+              options={attributes}
+              queryPart='attributes'
+              setErrorMsg={setErrorMsg}
+            />
+          ) : (
+            ''
+          )}
+          {reactors.length > 0 ? (
+            <OptionsList
+              options={reactors}
+              queryPart='reactors'
+              setErrorMsg={setErrorMsg}
+            />
+          ) : (
+            ''
+          )}
 
-        <div>
-          {attributes.includes('date_time') ? <ChooseTime /> : ''}
-          <ConvertSection
-            tableAttributes={attributes}
-            setFileReady={setFileReady}
-            setFileReadyQuery={setFileReadyQuery}
+          <div>
+            {attributes.includes('date_time') ? <ChooseTime /> : ''}
+            <ConvertSection
+              tableAttributes={attributes}
+              setFileReady={setFileReady}
+              setFileReadyQuery={setFileReadyQuery}
+              setErrorMsg={setErrorMsg}
+            />
+          </div>
+          <DownloadSection
+            fileReady={fileReady}
+            fileReadyQuery={fileReadyQuery}
           />
         </div>
-        <DownloadSection
-          fileReady={fileReady}
-          fileReadyQuery={fileReadyQuery}
-        />
-      </div>
-    </QueryProvider>
-  );
+      </QueryProvider>
+    );
+  }
 }
 
 export default App;

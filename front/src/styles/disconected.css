@@ -1,0 +1,40 @@
+.disconect-msg {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: fit-content;
+
+  padding: 0.2em 0.4em;
+  height: fit-content;
+  border: 4px solid #643939;
+  border-radius: 0.4em;
+  color: rgb(228, 228, 228);
+  font-size: 1.4em;
+}
+.disconect-msg > h2 {
+  color: rgb(172, 14, 14);
+}
+.refresh-btn {
+  background-color: #643939;
+  padding: 0.7em;
+  color: white;
+  border: none;
+  border-radius: 0.4em;
+  box-shadow: 1px 1px 4px 1px black;
+  margin: 0 0.5em 1em 0.5em;
+  cursor: pointer;
+}
+.blink {
+  animation: blink-animation 1s steps(3, start) infinite;
+  -webkit-animation: blink-animation 1s steps(3, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

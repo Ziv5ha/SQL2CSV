@@ -21,7 +21,7 @@ const createCSV = async (req, res, next) => {
   } catch (error) {
     console.log('OH NO! Something went wrong when converting the query to CSV');
     console.log(error);
-    // next(error);
+    next({ type: 404, error });
   }
 };
 

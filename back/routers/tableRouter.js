@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const {
-  getMachines,
+  getTables,
   getAttributes,
   getReactors,
 } = require('../controllers/tableController');
 const router = Router();
 
 // router.get('/download', )
-router.get('/tables', getMachines);
+router.get('/tables', getTables);
 router.get('/attributes/:machine', getAttributes);
 router.get('/reactors/:machine', getReactors);
 

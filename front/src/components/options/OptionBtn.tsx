@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+import axios, { Axios, AxiosError } from 'axios';
 import '../../styles/optionBtn.css';
 import { IQueryContext, QueryPart } from '../../types';
 import { QueryContext } from '../../context/queryContext';
@@ -7,11 +7,13 @@ import { QueryContext } from '../../context/queryContext';
 export default function OptionBtn({
   option,
   queryPart,
+  setErrorMsg,
   setAttributes,
   setReactors,
 }: {
   option: string;
   queryPart: QueryPart;
+  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setAttributes?: React.Dispatch<React.SetStateAction<string[]>>;
   setReactors?: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
@@ -31,7 +33,11 @@ export default function OptionBtn({
           `./get/reactors/${option}`
         );
         setReactors(reactors.data);
-      } catch (error) {
+      } catch (error: any) {
+        updateQuery('table', '');
+        if (error) {
+          if (error.message) setErrorMsg(error.message);
+        }
         console.log(error);
       }
     }

@@ -7,14 +7,16 @@ import { createQuery } from '../helpers/createQuery';
 
 export default function ConvertSection({
   tableAttributes,
+  setErrorMsg,
   setFileReady,
   setFileReadyQuery,
 }: {
   tableAttributes: string[];
+  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setFileReady: React.Dispatch<React.SetStateAction<boolean>>;
   setFileReadyQuery: React.Dispatch<React.SetStateAction<IQuery>>;
 }) {
-  const { query } = useContext(QueryContext) as IQueryContext;
+  const { query, updateQuery } = useContext(QueryContext) as IQueryContext;
   const { table, attributes, reactors } = query;
 
   const convertFunc = async (
@@ -28,7 +30,11 @@ export default function ConvertSection({
       });
       setFileReadyQuery(query);
       setFileReady(true);
-    } catch (error) {
+    } catch (error: any) {
+      updateQuery('table', '');
+      if (error) {
+        if (error.message) setErrorMsg(error.message);
+      }
       console.log(error);
     }
   };
