@@ -23,7 +23,7 @@ app.use(errorHandler);
 const start = async () => {
   await connectToDB();
   app.listen(8080, () => {
-    console.log('running on port 8080');
+    console.log('\x1b[43mrunning on port 8080\x1b[0m');
   });
   open('http://localhost:8080');
 };

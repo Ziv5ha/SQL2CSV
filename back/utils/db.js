@@ -11,21 +11,18 @@ let client = new Client({
 const connectToDB = async () => {
   try {
     await client.connect();
-    console.log('connected to DB');
+    console.log('\x1b[33mconnected to:\x1b[0m');
+    console.log({
+      host: HOST,
+      port: PORT,
+      user: USER,
+      password: PASSWORD,
+    });
   } catch (error) {
-    console.error('failed connecting to DB');
-    console.error('Check if the DB is online and restart the server');
+    console.error(
+      '\x1b[41mfailed connecting to DB\x1b[0m\nCheck if the DB is online and restart the server\x1b[0m'
+    );
   }
 };
 
-const reconnectToDB = async () => {
-  client = new Client({
-    host: HOST,
-    port: PORT,
-    user: USER,
-    password: PASSWORD,
-  });
-  await connectToDB();
-};
-
-module.exports = { connectToDB, client, reconnectToDB };
+module.exports = { connectToDB, client };

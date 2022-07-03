@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
       console.error(error);
       res.send(
         404,
-        'Could not get a response from the DB. Either a problem with the query or the DB server. Chech server logs for details.'
+        'Could not get a response from the DB. Either a problem with the query or the DB server. Check server logs for details.'
       );
       break;
     case 503:

@@ -19,7 +19,9 @@ const createCSV = async (req, res, next) => {
     // );
     jsonToCsv(data.rows, res);
   } catch (error) {
-    console.log('OH NO! Something went wrong when converting the query to CSV');
+    console.log(
+      '\x1b[41mOH NO!\x1b[0m Something went wrong when converting the query to CSV'
+    );
     console.log(error);
     next({ type: 404, error });
   }

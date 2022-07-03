@@ -8,7 +8,8 @@ const getTables = async (req, res, next) => {
     );
     res.send(result.rows.map((row) => row.tablename));
   } catch (error) {
-    const msg = 'OH NO! something wet srong when searching for tables';
+    const msg =
+      '\x1b[41mOH NO!\x1b[0m something wet srong when searching for tables';
     next({ type: 404, error, msg });
   }
 };
@@ -24,7 +25,8 @@ const getAttributes = async (req, res, next) => {
     const result = await client.query(`SELECT * FROM ${machine} WHERE false`);
     res.send(result.fields.map((field) => field.name));
   } catch (error) {
-    const msg = 'OH NO! something wet srong when searching for attributes';
+    const msg =
+      '\x1b[41mOH NO!\x1b[0m something wet srong when searching for attributes';
     next({ type: 404, error, msg });
   }
 };
@@ -42,7 +44,8 @@ const getReactors = async (req, res, next) => {
     );
     res.send(result.rows.map((reactor) => reactor.reactor_name));
   } catch (error) {
-    const msg = 'OH NO! something wet srong when searching for reactors';
+    const msg =
+      '\x1b[41mOH NO!\x1b[0m something wet srong when searching for reactors';
     next({ type: 404, error, msg });
   }
 };
