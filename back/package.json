@@ -12,9 +12,12 @@
   },
   "pkg": {
     "assets": [
-      "public/**/*"
+      "public/**/*",
+      "temp/**/*"
     ],
-    "output": "dist"
+    "targets": [
+      "node14-win-x64"
+    ]
   },
   "keywords": [],
   "author": "",

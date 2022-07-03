@@ -19,8 +19,15 @@ const connectToDB = async () => {
       password: PASSWORD,
     });
   } catch (error) {
+    console.error('\x1b[41mfailed connecting to:\x1b[0m');
+    console.log({
+      host: HOST,
+      port: PORT,
+      user: USER,
+      password: PASSWORD,
+    });
     console.error(
-      '\x1b[41mfailed connecting to DB\x1b[0m\nCheck if the DB is online and restart the server\x1b[0m'
+      'Check if the DB is online and the login info is correct then restart the server'
     );
   }
 };
