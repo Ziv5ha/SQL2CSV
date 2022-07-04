@@ -1,14 +1,24 @@
-const { HOST, PORT, USER, PASSWORD } = require('./config');
+const {
+  HOST,
+  PORT,
+  USER,
+  PASSWORD,
+  DATABASE,
+  CONNECTION_STRING,
+} = require('./config');
 
 const { Client } = require('pg');
 const { log } = require('./log');
 
-let client = new Client({
-  host: HOST,
-  port: PORT,
-  user: USER,
-  password: PASSWORD,
-});
+const client = CONNECTION_STRING
+  ? new Client({ connectionString: CONNECTION_STRING })
+  : new Client({
+      host: HOST,
+      port: PORT,
+      user: USER,
+      password: PASSWORD,
+      database: DATABASE,
+    });
 const connectToDB = async () => {
   try {
     await client.connect();
@@ -16,6 +26,7 @@ const connectToDB = async () => {
     console.log({
       host: HOST,
       port: PORT,
+      database: DATABASE,
       user: USER,
       password: PASSWORD,
     });
@@ -24,6 +35,7 @@ const connectToDB = async () => {
     console.log({
       host: HOST,
       port: PORT,
+      database: DATABASE,
       user: USER,
       password: PASSWORD,
     });

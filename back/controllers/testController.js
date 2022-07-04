@@ -9,13 +9,13 @@ const {
 
 const getTest = async (req, res, next) => {
   const result = await client.query(
-    "SELECT reactor_id.reactor_name AS Reactor_Name, measurements.controller_id AS controller_id, measurements.temperature AS temperature FROM measurements INNER JOIN reactor_id ON measurements.reactor_id = reactor_id.reactor_id WHERE reactor_id.reactor_name IN ('scrumpe2b', 'ejohnstone5', 'kmoroney2m')"
+    "SELECT table_name FROM information_schema.tables WHERE table_schema != 'pg_catalog' AND table_schema != 'information_schema'"
   );
   res.send(result.rows);
 };
 
 const testFunc = async (req, res, next) => {
-  await client.query('DROP TABLE IF EXISTS measurements');
+  await client.query('DROP TABLE IF EXISTS measurements_three_test');
   await client.query('DROP TABLE IF EXISTS reactor_id');
   await client.query(createMeasurementsTableTest);
   await client.query(createReactorIDTableTest);

@@ -7,7 +7,7 @@ const createCSV = async (req, res, next) => {
   try {
     // const { tables, attributes, time } = req.body;
     const { query } = req.body;
-    console.log(query);
+    log(`\n${query}`);
     if (containsDrop(query)) {
       res.send("don't DROP tables from here");
       return;

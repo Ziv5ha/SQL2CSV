@@ -4,9 +4,11 @@ const { client } = require('../utils/db');
 const getTables = async (req, res, next) => {
   try {
     const result = await client.query(
-      "SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'"
+      "SELECT table_name FROM information_schema.tables WHERE table_schema != 'pg_catalog' AND table_schema != 'information_schema'"
     );
-    res.send(result.rows.map((row) => row.tablename));
+    const tables = result.rows.map((row) => row.table_name);
+    if (tables.length === 0) throw new Error('No tables found');
+    res.send(result.rows.map((row) => row.table_name));
   } catch (error) {
     const msg =
       '\x1b[41mOH NO!\x1b[0m something wet srong when searching for tables';
@@ -39,7 +41,7 @@ const getReactors = async (req, res, next) => {
       return;
     }
     const result = await client.query(
-      `SELECT DISTINCT reactor_id.reactor_name FROM ${machine} INNER JOIN reactor_id ON measurements.reactor_id = reactor_id.reactor_id`
+      `SELECT DISTINCT reactor_id.reactor_name FROM ${machine} INNER JOIN reactor_id ON ${machine}.reactor_id = reactor_id.reactor_id`
     );
     res.send(result.rows.map((reactor) => reactor.reactor_name));
   } catch (error) {
