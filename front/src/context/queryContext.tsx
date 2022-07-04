@@ -14,12 +14,12 @@ const QueryProvider = ({ children }: { children: React.ReactNode }) => {
   const updateQuery = (queryPart: QueryPart, str: string) => {
     switch (queryPart) {
       case 'table':
-        setQuery({
+        setQuery(({ time }) => ({
           table: str,
           attributes: [],
-          time: { start: '', end: '' },
+          time,
           reactors: [],
-        });
+        }));
         break;
       case 'timeStart':
         setQuery(({ table, attributes, time: { end }, reactors }) => ({

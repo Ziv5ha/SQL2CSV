@@ -14,8 +14,8 @@ export default function QuickPicker({
 }) {
   const { updateQuery } = useContext(QueryContext) as IQueryContext;
   const onClickFunc = () => {
-    updateQuery('timeStart', getNowMoment());
-    updateQuery('timeEnd', getMomentXHoursAgo(hours));
+    updateQuery('timeEnd', getNowMoment());
+    updateQuery('timeStart', getMomentXHoursAgo(hours));
     setChoosen(hours);
   };
   return (

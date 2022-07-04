@@ -9,7 +9,7 @@ const {
 
 const getTest = async (req, res, next) => {
   const result = await client.query(
-    "SELECT table_name FROM information_schema.tables WHERE table_schema != 'pg_catalog' AND table_schema != 'information_schema'"
+    "SELECT reactor_id.reactor_name AS Reactor_Name, TO_CHAR(date_time, 'D-MM-YYYY HH24:MI') FROM measurements_three_test INNER JOIN reactor_id ON measurements_three_test.reactor_id = reactor_id.reactor_id WHERE reactor_name IN ('Lori') AND date_time BETWEEN '2022-07-04 09:52:31' AND '2022-07-04 12:52:31'"
   );
   res.send(result.rows);
 };

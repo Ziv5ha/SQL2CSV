@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "compile": "pkg .",
+    "compile": "pkg . -o Start",
     "test": "node converter.js"
   },
   "pkg": {

@@ -6,7 +6,10 @@ export const createQuery = (
 ): string => {
   const { table, attributes, reactors, time } = query;
   // const joins = [];
-  const newAttrs = attributes.map((attr) => `${table}.${attr} AS ${attr}`);
+  const newAttrs = attributes.map((attr) => {
+    if (attr === 'date_time') return `TO_CHAR(date_time, 'D/MM/YYYY HH24:MI')`;
+    else return `${table}.${attr} AS ${attr}`;
+  });
   // if (attributes.includes('reactor_id') && table !== 'reactor_id') {
   //   newAttrs.push('reactor_id.reactor_name AS Reactor_Name');
   //   joins.push(

@@ -6,20 +6,22 @@ const errorHandler = (err, req, res, next) => {
     case 404:
       log(msg);
       log(error);
-      res.send(
-        404,
-        'Could not get a response from the DB. Either a problem with the query or the DB server. Check server logs for details.'
-      );
+      res
+        .status(404)
+        .send(
+          404,
+          'Could not get a response from the DB. Either a problem with the query or the DB server. Check server logs for details.'
+        );
       break;
     case 503:
       log('Failed connecting to DB');
-      res.send('Failed connecting to DB');
+      res.status(503).send('Failed connecting to DB');
       break;
 
     default:
       log('OH NO! something went wrong! check logs for details');
       log(error);
-      res.send(400, 'something went wrong! check logs for details');
+      res.status(400).send('something went wrong! check logs for details');
       break;
   }
 };

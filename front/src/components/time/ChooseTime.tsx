@@ -9,7 +9,7 @@ import '../../styles/time.css';
 export default function ChooseTime() {
   const { updateQuery } = useContext(QueryContext) as IQueryContext;
   const [quickPicker, setQuickPicker] = useState<boolean>(false);
-  const [choosen, setChoosen] = useState(3);
+  const [choosen, setChoosen] = useState(0);
 
   useEffect(() => {
     updateQuery('timeStart', getNowMoment());
