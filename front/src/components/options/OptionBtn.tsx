@@ -42,12 +42,18 @@ export default function OptionBtn({
       ? query.table === option
       : query.attributes.includes(option) || query.reactors.includes(option);
 
+  const optionText =
+    option === 'measurements_five_hundred'
+      ? 'Measurements 500L'
+      : option === 'measurements_three'
+      ? 'Measurements 3L'
+      : option.replace(option[0], option[0].toUpperCase()).replaceAll('_', ' ');
   return (
     <button
       onClick={onClickFunc}
       className={chosen ? `option-btn chosen` : 'option-btn'}
     >
-      {option}
+      {optionText}
     </button>
   );
 }

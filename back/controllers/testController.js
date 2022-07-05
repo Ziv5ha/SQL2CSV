@@ -9,7 +9,7 @@ const {
 
 const getTest = async (req, res, next) => {
   const result = await client.query(
-    "SELECT reactor_id.reactor_name AS Reactor_Name, TO_CHAR(date_time, 'D-MM-YYYY HH24:MI') FROM measurements_three_test INNER JOIN reactor_id ON measurements_three_test.reactor_id = reactor_id.reactor_id WHERE reactor_name IN ('Lori') AND date_time BETWEEN '2022-07-04 09:52:31' AND '2022-07-04 12:52:31'"
+    "SELECT reactor_id.reactor_name AS Reactor_Name, measurements_three_test.temperature AS temperature, TO_CHAR(date_time, 'D/MM/YYYY HH24:MI') AS time FROM measurements_three_test INNER JOIN reactor_id ON measurements_three_test.reactor_id = reactor_id.reactor_id WHERE reactor_name IN ('Land', 'Lori', 'Bill', 'Katharine') AND date_time BETWEEN '2022-07-03 15:47:56' AND '2022-07-04 15:47:56'"
   );
   res.send(result.rows);
 };
